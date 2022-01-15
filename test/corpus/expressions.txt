@@ -1,0 +1,47 @@
+============================================
+Symbol
+============================================
+
+x
+\[Alpha]
+\[ScriptCapitalV]
+Private`x
+`\[Alpha]\[Alpha]abdfdsf`a2`\[Beta]2
+
+---
+
+(source_file
+  (expression (identifier))
+  (expression (identifier))
+  (expression (identifier))
+  (expression (scoped_symbol
+    context: (identifier)
+    name: (identifier)))
+  (expression (scoped_symbol
+    context: (identifier)
+    context: (identifier)
+    name: (identifier)))
+)
+
+============================================
+Numbers
+============================================
+
+123
+123``55
+123*^3
+1.0
+1.0``55
+1.0*^-2
+1.0``55*^-2
+
+---
+
+(source_file
+  (expression (number))
+  (expression (number))
+  (expression (number))
+  (expression (number))
+  (expression (number))
+  (expression (number))
+  (expression (number)))
