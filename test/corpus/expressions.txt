@@ -1031,3 +1031,20 @@ f[a_] := Module[{x = 1., xp},
           (label_statement
             tag: (identifier))
           (identifier))))))
+
+============================================
+Implicit Times
+============================================
+
+x + y z
+
+---
+    
+(source_file
+  (expression_statement
+    (implicit_times
+      (binary_operation
+        (identifier)
+        (identifier))
+      (identifier))))
+    

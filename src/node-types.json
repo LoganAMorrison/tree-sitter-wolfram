@@ -102,6 +102,10 @@
         "named": true
       },
       {
+        "type": "implicit_times",
+        "named": true
+      },
+      {
         "type": "label_statement",
         "named": true
       },
@@ -756,6 +760,42 @@
             "type": "compound",
             "named": true
           },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "implicit_times",
+    "named": true,
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
             "type": "expression",
             "named": true

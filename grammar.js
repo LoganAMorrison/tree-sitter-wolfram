@@ -61,7 +61,7 @@ const string_inner = repeat(
 module.exports = grammar({
   name: "wolfram",
 
-  externals: (_) => [],
+  externals: ($) => [$._implicit_times],
 
   extras: ($) => [
     $.comment,
@@ -114,7 +114,7 @@ module.exports = grammar({
         $.binary_operation,
         $.comparison_operation,
         $.unary_operation,
-        //$.implicit_times,
+        $.implicit_times,
         $.call,
         $.subscript,
         $.pure_function,
@@ -129,7 +129,7 @@ module.exports = grammar({
         $._special
       ),
 
-    parenthesized: ($) => seq("(", $._compound_or_expression, ")"),
+    parenthesized: ($) => seq("(", choice($.compound, $.expression), ")"),
 
     // =======================================================================
     // ---- Special ----------------------------------------------------------
@@ -316,12 +316,25 @@ module.exports = grammar({
       );
     },
 
-    // implicit_times: ($) =>
-    //   prec.dynamic(
-    //     -1,
+    implicit_times: ($) =>
+      prec.left(
+        0,
+        seq(
+          field("lhs", $.expression),
+          field("operator", alias($._implicit_times, "*")),
+          field("rhs", $.expression)
+        )
+      ),
+
+    // implicit_times_newline: ($) =>
+    //   prec.left(
+    //     0,
     //     seq(
     //       field("lhs", $.expression),
-    //       field("operator", alias(token(/\s+/), "*")),
+    //       field(
+    //         "operator",
+    //         alias(seq(repeat1(newline), $._implicit_times), "*")
+    //       ),
     //       field("rhs", $.expression)
     //     )
     //   ),

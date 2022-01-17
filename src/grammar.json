@@ -164,6 +164,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "implicit_times"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call"
         },
         {
@@ -216,8 +220,17 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "_compound_or_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "compound"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -1590,6 +1603,44 @@
           }
         }
       ]
+    },
+    "implicit_times": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_implicit_times"
+              },
+              "named": false,
+              "value": "*"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          }
+        ]
+      }
     },
     "comparison_operation": {
       "type": "CHOICE",
@@ -4500,7 +4551,12 @@
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_implicit_times"
+    }
+  ],
   "inline": [],
   "supertypes": [
     "atomic",
