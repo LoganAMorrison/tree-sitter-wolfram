@@ -85,12 +85,21 @@ module.exports = grammar({
         seq(
           choice(
             $.expression,
-            $.unset
+            $.unset,
+            $.compound
             //$.get_statement
           ),
           newline
         )
       ),
+
+    compound: ($) =>
+      precedented(
+        precedences.compound_expression,
+        seq(repeat1(seq($.expression, ";")), $.expression, optional(";"))
+      ),
+
+    _compound_or_expression: ($) => choice($.compound, $.expression),
 
     get_statement: ($) =>
       seq("<<", field("name", seq($._symbol, optional("`")))),
@@ -117,17 +126,10 @@ module.exports = grammar({
         $.pattern_test,
         $.condition,
         $.parenthesized,
-        $.compound,
         $._special
       ),
 
-    compound: ($) =>
-      precedented(
-        precedences.compound_expression,
-        seq(repeat1(seq($.expression, ";")), $.expression, optional(";"))
-      ),
-
-    parenthesized: ($) => seq("(", $.expression, ")"),
+    parenthesized: ($) => seq("(", $._compound_or_expression, ")"),
 
     // =======================================================================
     // ---- Special ----------------------------------------------------------
@@ -163,7 +165,7 @@ module.exports = grammar({
       seq(
         "Do",
         "[",
-        $.expression,
+        $._compound_or_expression,
         ",",
         choice($.integer, repeat1($.iter_list)),
         "]"
@@ -173,9 +175,9 @@ module.exports = grammar({
       seq(
         "While",
         "[",
-        field("test", $.expression),
+        field("test", $._compound_or_expression),
         ",",
-        field("body", $.expression),
+        field("body", $._compound_or_expression),
         "]"
       ),
 
@@ -183,13 +185,13 @@ module.exports = grammar({
       seq(
         "For",
         "[",
-        field("start", $.expression),
+        field("start", $._compound_or_expression),
         ",",
-        field("test", $.expression),
+        field("test", $._compound_or_expression),
         ",",
-        field("incr", $.expression),
+        field("incr", $._compound_or_expression),
         ",",
-        field("body", $.expression),
+        field("body", $._compound_or_expression),
         "]"
       ),
 
@@ -213,10 +215,10 @@ module.exports = grammar({
     },
 
     if_block: ($) => {
-      const c = field("condition", $.expression);
-      const t = field("true", $.expression);
-      const f = field("false", $.expression);
-      const u = field("other", $.expression);
+      const c = field("condition", $._compound_or_expression);
+      const t = field("true", $._compound_or_expression);
+      const f = field("false", $._compound_or_expression);
+      const u = field("other", $._compound_or_expression);
 
       return choice(
         seq("If", "[", c, ",", t, "]"),
@@ -229,13 +231,13 @@ module.exports = grammar({
       seq(
         "Switch",
         "[",
-        field("expr", $.expression),
+        field("expr", $._compound_or_expression),
         repeat1(
           seq(
             ",",
-            field("form", $.expression),
+            field("form", $._compound_or_expression),
             ",",
-            field("value", $.expression)
+            field("value", $._compound_or_expression)
           )
         ),
         "]"
@@ -245,13 +247,17 @@ module.exports = grammar({
       seq(
         "Which",
         "[",
-        seq(field("test", $.expression), ",", field("value", $.expression)),
+        seq(
+          field("test", $._compound_or_expression),
+          ",",
+          field("value", $._compound_or_expression)
+        ),
         repeat(
           seq(
             ",",
-            field("test", $.expression),
+            field("test", $._compound_or_expression),
             ",",
-            field("value", $.expression)
+            field("value", $._compound_or_expression)
           )
         ),
         "]"
@@ -263,7 +269,7 @@ module.exports = grammar({
         "[",
         field("locals", $.list),
         ",",
-        field("body", $.expression),
+        field("body", $._compound_or_expression),
         "]"
       ),
 

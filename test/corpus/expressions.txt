@@ -823,7 +823,7 @@ For[i = 1; t = x, i^2 < 10, i++, t = t^2 + i; Print[t]]
             (identifier)))))))
 
 ============================================
-Swich
+Switch
 ============================================
 
 f[b_] := Switch[b, True, 1, False, 0, _, Message[f::boole, b]; 0]
@@ -997,42 +997,37 @@ f[a_] := Module[{x = 1., xp},
             rhs: (float))
           (identifier))
         body: (compound
-          (compound
-            (compound
-              (compound
-                (compound
-                  (compound
-                    (label_statement
-                      tag: (identifier))
-                    (if_block
-                      condition: (comparison_operation
-                        lhs: (call
-                          head: (identifier)
-                          arguments: (argument_list
-                            (binary_operation
-                              lhs: (identifier)
-                              rhs: (identifier))))
-                        rhs: (binary_operation
-                          lhs: (integer)
-                          rhs: (unary_operation
-                            expr: (integer))))
-                      true: (goto_statement
-                        tag: (identifier))))
-                  (assignment
+          (label_statement
+            tag: (identifier))
+          (if_block
+            condition: (comparison_operation
+              lhs: (call
+                head: (identifier)
+                arguments: (argument_list
+                  (binary_operation
                     lhs: (identifier)
-                    rhs: (identifier)))
-                (assignment
+                    rhs: (identifier))))
+              rhs: (binary_operation
+                lhs: (integer)
+                rhs: (unary_operation
+                  expr: (integer))))
+            true: (goto_statement
+              tag: (identifier)))
+          (assignment
+            lhs: (identifier)
+            rhs: (identifier))
+          (assignment
+            lhs: (identifier)
+            rhs: (binary_operation
+              lhs: (parenthesized
+                (binary_operation
                   lhs: (identifier)
                   rhs: (binary_operation
-                    lhs: (parenthesized
-                      (binary_operation
-                        lhs: (identifier)
-                        rhs: (binary_operation
-                          lhs: (identifier)
-                          rhs: (identifier))))
-                    rhs: (integer))))
-              (goto_statement
-                tag: (identifier)))
-            (label_statement
-              tag: (identifier)))
+                    lhs: (identifier)
+                    rhs: (identifier))))
+              rhs: (integer)))
+          (goto_statement
+            tag: (identifier))
+          (label_statement
+            tag: (identifier))
           (identifier))))))
