@@ -11,15 +11,14 @@ Private`x
 ---
 
 (source_file
-  (expression (identifier))
-  (expression (identifier))
-  (expression (identifier))
-  (expression (scoped_symbol
-    context: (identifier)
+  (expression_statement (identifier))
+  (expression_statement (identifier))
+  (expression_statement (identifier))
+  (expression_statement (scoped_symbol
+    context: (context)
     name: (identifier)))
-  (expression (scoped_symbol
-    context: (identifier)
-    context: (identifier)
+  (expression_statement (scoped_symbol
+    context: (context)
     name: (identifier)))
 )
 
@@ -38,10 +37,1002 @@ Numbers
 ---
 
 (source_file
-  (expression (number))
-  (expression (number))
-  (expression (number))
-  (expression (number))
-  (expression (number))
-  (expression (number))
-  (expression (number)))
+  (expression_statement (integer))
+  (expression_statement (float))
+  (expression_statement (integer))
+  (expression_statement (float))
+  (expression_statement (float))
+  (expression_statement (float))
+  (expression_statement (float)))
+
+============================================
+String
+============================================
+
+"Hello!"
+"multi\
+line\
+string"
+
+---
+
+(source_file 
+  (expression_statement (string))
+  (expression_statement (string))
+)
+
+============================================
+Comments
+============================================
+
+(* Comment *)
+(* (* comment *) *)
+(* (* (**) *) *)
+(*
+  comment
+*)
+(*
+  (* comment *)
+*)
+
+(* -- blah--- *)
+(* ========================================================================== *)
+(* ---- Kinetic Terms ------------------------------------------------------- *)
+(* ========================================================================== *)
+
+---
+
+(source_file
+  (comment)
+  (comment)
+  (comment (comment))
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (comment))
+
+============================================
+Blank
+============================================
+
+_
+__
+___
+x_
+x__
+x___
+_h
+
+---
+
+(source_file 
+  (expression_statement (pattern_blank))
+  (expression_statement (pattern_blank))
+  (expression_statement (pattern_blank))
+  (expression_statement (pattern_blank (identifier)))
+  (expression_statement (pattern_blank (identifier)))
+  (expression_statement (pattern_blank (identifier)))
+  (expression_statement (pattern_blank (identifier))))
+
+============================================
+Slot
+============================================
+
+#
+#1
+#hi
+#"hello"
+##
+##3
+
+---
+
+(source_file 
+  (expression_statement (slot))
+  (expression_statement (slot tag: (integer)))
+  (expression_statement (slot tag: (identifier)))
+  (expression_statement (slot tag: (string)))
+  (expression_statement (slot))
+  (expression_statement (slot tag: (integer)))
+)
+
+============================================
+Out
+============================================
+
+%
+%%
+%%%
+%1
+
+---
+(source_file 
+  (expression_statement (out))
+  (expression_statement (out))
+  (expression_statement (out))
+  (expression_statement (out tag: (integer)))
+)
+
+============================================
+Message Name
+============================================
+
+MyFunction::usage = "Hi"
+MyFunction::usage = "multi-line \
+docstring"
+
+---
+
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (message_name
+        symbol: (identifier) 
+        tag: (identifier))
+      rhs: (string)))
+  (expression_statement
+    (assignment
+      lhs: (message_name
+        symbol: (identifier) 
+        tag: (identifier))
+      rhs: (string))))
+
+============================================
+Augmented Assigment
+============================================
+
+x += 2 + 3
+x -= 2 + 3
+x *= 2 + 3
+x /= 2 + 3
+
+---
+
+(source_file
+  (expression_statement 
+      (augmented_assignment
+        lhs: (identifier)
+        rhs: (binary_operation 
+          lhs: (integer)
+          rhs: (integer))))
+  (expression_statement 
+      (augmented_assignment
+        lhs: (identifier)
+        rhs: (binary_operation 
+          lhs: (integer)
+          rhs: (integer))))
+  (expression_statement 
+      (augmented_assignment
+        lhs: (identifier)
+        rhs: (binary_operation 
+          lhs: (integer)
+          rhs: (integer))))
+  (expression_statement 
+      (augmented_assignment
+        lhs: (identifier)
+        rhs: (binary_operation 
+          lhs: (integer)
+          rhs: (integer)))))
+
+
+============================================
+Binary Operation
+============================================
+
+x + y
+x - y
+x * y
+x / y
+x ^ y
+x @ y
+x @@ y
+x @@@ y
+x /@ y
+x //@ y
+x ** y
+x . y
+x -> y
+x :> y
+x /. y
+x //. y
+x // y
+x <> y
+
+---
+
+(source_file
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (binary_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  ) 
+
+
+============================================
+Comparison
+============================================
+
+x < y
+x <= y
+x >= y
+x == y
+x =!= y
+x === y
+
+---
+
+(source_file
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  ) 
+
+
+============================================
+Unary Operation
+============================================
+
++ y
+- y
+++ y
+-- y
+y..
+y...
+y--
+y++
+y'
+y''
+y'''
+y!
+y!!
+
+---
+
+(source_file
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  (expression_statement 
+      (unary_operation
+        expr: (identifier)))
+  ) 
+
+
+
+============================================
+Comparison
+============================================
+
+x < y
+x <= y
+x >= y
+x == y
+x =!= y
+x === y
+
+---
+
+(source_file
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  (expression_statement 
+      (comparison_operation
+        lhs: (identifier)
+        rhs: (identifier)))
+  ) 
+
+============================================
+Pure function
+============================================
+
+#^2 + 2*# + 4&
+
+---
+
+(source_file
+  (expression_statement
+    (pure_function
+      (binary_operation
+        (binary_operation
+          (binary_operation
+            (slot)
+            (integer))
+          (binary_operation
+            (integer)
+            (slot)))
+        (integer)))))
+
+============================================
+List
+============================================
+
+x = {el1, el2, el3}
+x = {{e11,e12}, {e21,e22}, {e31,e32}}
+
+---
+
+(source_file
+  (expression_statement 
+    (assignment
+      lhs: (identifier)
+      rhs: (list 
+        (identifier)
+        (identifier)
+        (identifier))))
+  (expression_statement 
+    (assignment
+      lhs: (identifier)
+      rhs: (list 
+        (list (identifier) (identifier))
+        (list (identifier) (identifier))
+        (list (identifier) (identifier)))))
+)
+
+============================================
+Association
+============================================
+
+x = <| "hi" -> "Hello", "bye" -> "Farewell" |>
+
+---
+
+(source_file
+  (expression_statement 
+    (assignment
+      lhs: (identifier)
+      rhs: (association 
+        (binary_operation
+          lhs: (string)
+          rhs: (string))
+        (binary_operation
+          lhs: (string)
+          rhs: (string))))))
+
+============================================
+Subscript
+============================================
+
+x[[1,2,3]]
+
+---
+
+(source_file
+  (expression_statement 
+    (subscript
+      head: (identifier)
+      arguments: (argument_list (integer) (integer) (integer)))))
+
+============================================
+Span
+============================================
+
+x[[1;;All]]
+
+---
+
+(source_file
+  (expression_statement 
+    (subscript
+      head: (identifier)
+      arguments: (argument_list 
+        (span
+          start: (integer)
+          end: (builtin_symbol)
+        ) 
+      )
+    )
+  )
+)
+
+============================================
+Pattern
+============================================
+
+Cases[{{1, 2, 3}, a, {4, 5}}, t : {__Integer} :> t^2]
+
+name : x_ + y_
+name : x_ + y_ : default
+x_ + y_ : default
+
+---
+
+(source_file
+  (expression_statement
+    (call
+      head: (identifier)
+      arguments: (argument_list
+        (list
+          (list
+            (integer)
+            (integer)
+            (integer))
+            (identifier)
+          (list
+            (integer)
+            (integer))
+        )
+        (binary_operation
+          lhs: (pattern
+            symbol: (identifier)
+            pattern: (list
+              (pattern_blank
+                name: (identifier))))
+          rhs: (binary_operation
+            lhs: (identifier)
+            rhs: (integer))))))
+  (expression_statement 
+    (pattern
+      symbol: (identifier)
+      pattern: (binary_operation
+        lhs: (pattern_blank (identifier))
+        rhs: (pattern_blank (identifier)))))
+  (expression_statement 
+    (pattern
+      pattern: (pattern
+        symbol: (identifier)
+        pattern: (binary_operation
+          lhs: (pattern_blank (identifier))
+          rhs: (pattern_blank (identifier))))
+        default: (identifier)))
+  (expression_statement 
+    (pattern
+      pattern: (binary_operation
+        lhs: (pattern_blank (identifier))
+        rhs: (pattern_blank (identifier)))
+      default: (identifier))))
+
+============================================
+Pattern Test
+============================================
+
+Cases[{1, 2, 3.5, x, y, 4}, _?NumberQ]
+
+---
+(source_file
+  (expression_statement
+    (call
+      head: (identifier)
+      arguments: (argument_list
+        (list
+          (integer)
+          (integer)
+          (float)
+          (identifier)
+          (identifier)
+          (integer))
+        (pattern_test
+          pattern: (pattern_blank)
+          test: (identifier))))))
+
+============================================
+Condition
+============================================
+
+f[x_] := ppp[x] /; x > 0
+
+---
+
+(source_file
+  (expression_statement 
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (condition
+        pattern: (call
+          head: (identifier)
+          arguments: (argument_list
+            (identifier)))
+        test: (comparison_operation
+          lhs: (identifier)
+          rhs: (integer))))))
+
+============================================
+Do
+============================================
+
+Do[Print[n^2], {n, 4}]
+Do[Print[n], {n, -3, 5, 2}]
+Do[Print[RandomInteger[10]], 4]
+
+---
+    
+(source_file
+  (expression_statement
+    (do_block
+      (call
+        head: (identifier)
+        arguments: (argument_list
+          (binary_operation
+            lhs: (identifier)
+            rhs: (integer))))
+      (iter_list
+        iter: (identifier)
+        to: (integer))))
+  (expression_statement
+    (do_block
+      (call
+        head: (identifier)
+        arguments: (argument_list
+          (identifier)))
+      (iter_list
+        iter: (identifier)
+        from: (unary_operation expr: (integer))
+        to: (integer)
+        step: (integer))))
+  (expression_statement
+    (do_block
+      (call
+        head: (identifier)
+        arguments: (argument_list
+          (call
+            head: (identifier)
+            arguments: (argument_list
+              (integer)))))
+      (integer))))
+
+============================================
+If
+============================================
+
+abs[x_] := If[x < 0, -x, x]
+
+---
+    
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (if_block
+        condition: (comparison_operation
+          lhs: (identifier)
+          rhs: (integer))
+        true: (unary_operation
+          expr: (identifier))
+        false: (identifier)))))
+
+
+============================================
+Return
+============================================
+
+f[x_] := (If[x > 5, Return[a]]; x + 3)
+
+---
+
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (parenthesized
+        (compound
+          (if_block
+            condition: (comparison_operation
+              lhs: (identifier)
+              rhs: (integer))
+            true: (return_statement
+              (identifier)))
+          (binary_operation
+            lhs: (identifier)
+            rhs: (integer)))))))
+    
+
+============================================
+For
+============================================
+
+For[i = 0, i < 4, i++, Print[i]]
+For[i = 1; t = x, i^2 < 10, i++, t = t^2 + i; Print[t]]
+
+---
+    
+(source_file
+  (expression_statement
+    (for_block
+      start: (assignment
+        lhs: (identifier)
+        rhs: (integer))
+      test: (comparison_operation
+        lhs: (identifier)
+        rhs: (integer))
+      incr: (unary_operation
+        expr: (identifier))
+      body: (call
+        head: (identifier)
+        arguments: (argument_list
+          (identifier)))))
+  (expression_statement
+    (for_block
+      start: (compound
+        (assignment
+          lhs: (identifier)
+          rhs: (integer))
+        (assignment
+          lhs: (identifier)
+          rhs: (identifier)))
+      test: (comparison_operation
+        lhs: (binary_operation
+          lhs: (identifier)
+          rhs: (integer))
+        rhs: (integer))
+      incr: (unary_operation
+        expr: (identifier))
+      body: (compound
+        (assignment
+          lhs: (identifier)
+          rhs: (binary_operation
+            lhs: (binary_operation
+              lhs: (identifier)
+              rhs: (integer))
+            rhs: (identifier)))
+        (call
+          head: (identifier)
+          arguments: (argument_list
+            (identifier)))))))
+
+============================================
+Swich
+============================================
+
+f[b_] := Switch[b, True, 1, False, 0, _, Message[f::boole, b]; 0]
+
+---
+
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (switch_block
+        expr: (identifier)
+        form: (builtin_symbol)
+        value: (integer)
+        form: (builtin_symbol)
+        value: (integer)
+        form: (pattern_blank)
+        value: (compound
+          (call
+            head: (identifier)
+            arguments: (argument_list
+              (message_name
+                symbol: (identifier)
+                tag: (identifier))
+              (identifier)))
+          (integer))))))
+
+
+============================================
+Which Block
+============================================
+
+a = 2; Which[a == 1, x, a == 2, b]
+
+---
+    
+(source_file
+  (expression_statement
+    (compound
+      (assignment
+        lhs: (identifier)
+        rhs: (integer))
+      (which_block
+        test: (comparison_operation
+          lhs: (identifier)
+          rhs: (integer))
+        value: (identifier)
+        test: (comparison_operation
+          lhs: (identifier)
+          rhs: (integer))
+        value: (identifier)))))
+    
+============================================
+While Block
+============================================
+
+n = 1; While[n < 4, Print[n]; n++]
+
+---
+    
+(source_file
+  (expression_statement
+    (compound
+      (assignment
+        lhs: (identifier)
+        rhs: (integer))
+      (while_block
+        test: (comparison_operation
+          lhs: (identifier)
+          rhs: (integer))
+        body: (compound
+          (call
+            head: (identifier)
+            arguments: (argument_list
+              (identifier)))
+          (unary_operation
+            expr: (identifier)))))))
+
+============================================
+Module Block
+============================================
+
+f[x0_] :=
+ Module[{x = x0},
+  While[x > 0, x = Log[x]];
+  x
+  ]
+
+---
+    
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (module_block
+        locals: (list
+          (assignment
+            lhs: (identifier)
+            rhs: (identifier)))
+        body: (compound
+          (while_block
+            test: (comparison_operation
+              lhs: (identifier)
+              rhs: (integer))
+            body: (assignment
+              lhs: (identifier)
+              rhs: (call
+                head: (identifier)
+                arguments: (argument_list
+                  (identifier)))))
+          (identifier))))))
+
+
+    
+============================================
+Block Block
+============================================
+
+Block[{$RecursionLimit = 20}, x = x + 1]
+
+---
+    
+(source_file
+  (expression_statement
+    (module_block
+      locals: (list
+        (assignment
+          lhs: (identifier)
+          rhs: (integer)))
+      body: (assignment
+        lhs: (identifier)
+        rhs: (binary_operation
+          lhs: (identifier)
+          rhs: (integer))))))
+
+============================================
+Goto Label
+============================================
+
+f[a_] := Module[{x = 1., xp},
+  Label[begin];
+  If[Abs[xp - x] < 10^-8, Goto[end]];
+  xp = x;
+  x = (x + a/x)/2;
+  Goto[begin];
+  Label[end];
+  x]
+
+---
+    
+(source_file
+  (expression_statement
+    (assignment
+      lhs: (call
+        head: (identifier)
+        arguments: (argument_list
+          (pattern_blank
+            (identifier))))
+      rhs: (module_block
+        locals: (list
+          (assignment
+            lhs: (identifier)
+            rhs: (float))
+          (identifier))
+        body: (compound
+          (compound
+            (compound
+              (compound
+                (compound
+                  (compound
+                    (label_statement
+                      tag: (identifier))
+                    (if_block
+                      condition: (comparison_operation
+                        lhs: (call
+                          head: (identifier)
+                          arguments: (argument_list
+                            (binary_operation
+                              lhs: (identifier)
+                              rhs: (identifier))))
+                        rhs: (binary_operation
+                          lhs: (integer)
+                          rhs: (unary_operation
+                            expr: (integer))))
+                      true: (goto_statement
+                        tag: (identifier))))
+                  (assignment
+                    lhs: (identifier)
+                    rhs: (identifier)))
+                (assignment
+                  lhs: (identifier)
+                  rhs: (binary_operation
+                    lhs: (parenthesized
+                      (binary_operation
+                        lhs: (identifier)
+                        rhs: (binary_operation
+                          lhs: (identifier)
+                          rhs: (identifier))))
+                    rhs: (integer))))
+              (goto_statement
+                tag: (identifier)))
+            (label_statement
+              tag: (identifier)))
+          (identifier))))))

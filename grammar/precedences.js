@@ -91,7 +91,7 @@ function make_precedences() {
   };
   operators.compound_expression = {
     precedence: next(),
-    associativity: prec.left,
+    associativity: prec.right,
     tokens: [";"],
   };
   operators.infix.put = {
@@ -211,7 +211,7 @@ function make_precedences() {
   };
   operators.infix.rule_delayed = {
     precedence: operators.infix.rule.precedence,
-    associativity: prec,
+    associativity: prec.right,
     tokens: [":>", "\uf51f", "\\[RuleDelayed]"],
   };
   operators.infix.two_way_rule = {
@@ -336,7 +336,7 @@ function make_precedences() {
   };
   operators.and = {
     precedence: next(),
-    associativity: prec,
+    associativity: prec.left,
     tokens: ["&&", "\u2227", "\\[And]"],
   };
   operators.nand = {
@@ -402,7 +402,7 @@ function make_precedences() {
   };
   operators.comparison.unsameq = {
     precedence: operators.comparison.sameq.precedence,
-    associativity: prec,
+    associativity: prec.left,
     tokens: ["=!="],
   };
 
@@ -1124,12 +1124,12 @@ function make_precedences() {
   };
   operators.infix.times = {
     precedence: operators.infix.star.precedence,
-    associativity: prec,
+    associativity: prec.left,
     tokens: ["*", "\u00d7"],
   };
   operators.fake.implicit_times = {
     precedence: operators.infix.star.precedence,
-    associativity: prec,
+    associativity: prec.left,
     tokens: [
       "\u2062",
       "\uF360",
@@ -1172,7 +1172,7 @@ function make_precedences() {
   };
   operators.infix.divide = {
     precedence: next(),
-    associativity: prec,
+    associativity: prec.left,
     tokens: ["/", "\u00f7"],
   };
   operators.divides = {
@@ -1555,6 +1555,11 @@ function make_precedences() {
   return operators;
 }
 
+function makePrecedented(precedence, obj) {
+  return precedence.associativity(precedence.precedence, obj);
+}
+
 module.exports = {
+  makePrecedented,
   ...make_precedences(),
 };
